@@ -1,6 +1,14 @@
 # FrozenBones
 ## A WordPress Development Theme
 
+### Bulma
+
+This version of FrozenBones integrates the Bulma CSS framework using the Node.js package manager, and Gulp. After cloning this repository, you can build a fresh copy of this theme:
+
+1. `npm install` or `yarn install`.
+2. `npm install -g gulp` or `yarn global gulp`.
+3. `gulp` or `gulp watch` with `--dev` as necessary.
+
 ### Introduction
 
 FrozenBones is a look into the foundations of WordPress development theming. Developed by [PxO Ink LLC](http://pxoink.net/) and based on [Bones](https://github.com/eddiemachado/bones) by [Eddie Machado](http://themble.com/bones) and [_s](https://github.com/automattic/_s), this theme is designed to provide a comprehensive platform while maintaining a simplistic, "bare-bones," product. Modern versions of FrozenBones are based off of changes to the 20xx themes developed by WordPress.
