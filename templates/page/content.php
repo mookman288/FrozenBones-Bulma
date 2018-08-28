@@ -1,6 +1,6 @@
 					<main id="page-<?php the_ID(); ?>" role="main" <?php post_class(); ?>>
 						<header>
-							<h1>
+							<h1 class="title">
 								<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">
 									<?php the_title(); ?>
 								</a>

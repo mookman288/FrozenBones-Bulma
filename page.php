@@ -17,17 +17,23 @@
 
 	get_header();
 ?>
-			<section id="main">
-				<header>
-					<?php _frozen_breadcrumbs(); ?>
-				</header>
-			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-				<?php get_template_part('templates/page/content', 'page'); ?>
-			<?php endwhile; else : ?>
-				<section id="page-not-found">
-					<?php _frozen_not_found(); ?>
-				</section>
-			<?php endif; ?>
+			<section class="section">
+				<div class="container">
+					<div class="columns">
+						<section id="main" class="column is-9">
+							<header>
+								<?php _frozen_breadcrumbs(); ?>
+							</header>
+						<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+							<?php get_template_part('templates/page/content', 'page'); ?>
+						<?php endwhile; else : ?>
+							<section id="page-not-found">
+								<?php _frozen_not_found(); ?>
+							</section>
+						<?php endif; ?>
+						</section>
+						<?php get_sidebar(); ?>
+					</div>
+				</div>
 			</section>
-			<?php get_sidebar(); ?>
 <?php get_footer(); ?>

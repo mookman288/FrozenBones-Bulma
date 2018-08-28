@@ -12,28 +12,34 @@
 
 	get_header();
 ?>
-			<section id="main" class="page-archive">
-				<header>
-					<?php _frozen_breadcrumbs(); ?>
-					<?php
-						//Show the archive title.
-						the_archive_title('<h1>', '</h1>' );
-					?>
-				</header>
-				<?php
-					//Show the archive description.
-					the_archive_description('<section class="archive-description">', '</section>');
-				?>
-				<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-					<?php get_template_part('templates/post/content', get_post_format()); ?>
-				<?php endwhile; else : ?>
-					<article class="post-404">
-						<?php _frozen_not_found(); ?>
-					</article>
-				<?php endif; ?>
-				<footer>
-					<?php _frozen_page_navi(); ?>
-				</footer>
+			<section class="section">
+				<div class="container">
+					<div class="columns">
+						<section id="main" class="page-archive column is-9">
+							<header>
+								<?php _frozen_breadcrumbs(); ?>
+								<?php
+									//Show the archive title.
+									the_archive_title('<h1 class="title">', '</h1>' );
+								?>
+							</header>
+							<?php
+								//Show the archive description.
+								the_archive_description('<section class="archive-description">', '</section>');
+							?>
+							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+								<?php get_template_part('templates/post/content', get_post_format()); ?>
+							<?php endwhile; else : ?>
+								<article class="post-404">
+									<?php _frozen_not_found(); ?>
+								</article>
+							<?php endif; ?>
+							<footer>
+								<?php _frozen_page_navi(); ?>
+							</footer>
+						</section>
+						<?php get_sidebar(); ?>
+					</div>
+				</div>
 			</section>
-			<?php get_sidebar(); ?>
 <?php get_footer(); ?>

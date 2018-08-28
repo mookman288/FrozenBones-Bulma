@@ -1,4 +1,4 @@
-				<aside role="complementary">
+				<aside role="complementary" class="column is-3">
 					<?php if (is_active_sidebar('sidebar_default')) { ?>
 						<?php dynamic_sidebar('sidebar_default'); ?>
 					<?php } else { ?>

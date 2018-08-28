@@ -2,6 +2,7 @@
 const	autoprefix	=	require("gulp-autoprefixer");
 const	concat		=	require('gulp-concat');
 const	cleanCSS	=	require('gulp-clean-css');
+const	fs			=	require('fs');
 const	gulp		=	require("gulp");
 const	gulpif		=	require("gulp-if");
 const	jshint		=	require("gulp-jshint");
@@ -48,7 +49,7 @@ gulp.task('hintjs', function() {
 gulp.task("js", ['hintjs'], function() {
 	//Run Gulp.
 	return gulp.src('./src/js/**/*.js')
-		.pipe(concat('scripts.js'))
+		.pipe(concat('frozen.custom.js'))
 		.pipe(gulpif(!dev, minify({mangle: {keepClassName: true}})))
 		.pipe(gulp.dest('./js'));
 });
@@ -57,6 +58,9 @@ gulp.task("js", ['hintjs'], function() {
 gulp.task('sass', function() {
 	//Declare variables.
 	var	die	=	false;
+
+	//If not dev remove the map file.
+	if (!dev) fs.unlinkSync('./css/stylesheet.css.map');
 
 	//Run Gulp.
 	gulp.src('./src/sass/*.scss')

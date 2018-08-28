@@ -1,0 +1,55 @@
+.site-information {
+	display: none;
+}
+
+.hero {
+	margin-bottom: $size-1;
+}
+
+.metadata, .breadcrumb, .comments h2, .comments ol, .comments li, .comments h3 {
+	margin-bottom: $size-normal;
+}
+
+section.content, article.content, .comments, #main > footer {
+	margin-top: $size-large;
+}
+
+header > .title, article:not(:last-child) {
+	margin-bottom: $size-large;
+}
+
+.comments {
+	ol {
+		list-style-type: none;
+
+		ul {
+			li {
+				margin-left: $size-large;
+			}
+		}
+	}
+}
+
+label[for] {
+	cursor: pointer;
+}
+
+.widget {
+	&:not(:last-child) {
+		margin-bottom: $size-large;
+	}
+
+	.widgettitle {
+		font-size: $size-4;
+	}
+}
+
+footer {
+	&.section {
+		.navbar-item {
+			flex-grow: 1;
+    		flex-direction: column;
+    		justify-content: center;
+		}
+	}
+}

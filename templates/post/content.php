@@ -1,19 +1,19 @@
 					<article id="post-<?php the_ID(); ?>" role="article"<?php post_class(); ?>>
 						<header>
 						<?php if (!is_single() || is_home() || is_front_page()) { ?>
-							<h2>
+							<h2 class="subtitle">
 								<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">
 									<?php the_title(); ?>
 								</a>
 							</h2>
 						<?php } else { ?>
-							<h1>
+							<h1 class="title">
 								<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">
 									<?php the_title(); ?>
 								</a>
 							</h1>
 						<?php } ?>
-							<p class="card">
+							<p class="metadata">
 							<?php
 								printf(
 									_('Posted <time datetime="%1$s" pubdate>%2$s</time> by <span class="author">%3$s</span>.'),
@@ -48,3 +48,6 @@
 						</footer>
 					<?php } ?>
 					</article>
+					<?php if (!is_home() && !is_front_page()) { ?>
+						<?php require(get_stylesheet_directory() . '/comments.php'); ?>
+					<?php } ?>

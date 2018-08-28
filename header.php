@@ -21,11 +21,6 @@
 	<body <?php body_class(); ?>>
 		<section id="container">
 			<header>
-				<?php headerNavigation(); ?>
-				<a href="<?php print(home_url()); ?>" rel="nofollow"><?php
-					?><img src="<?php print($image); ?>"
-					alt="<?php bloginfo('name'); ?> <?php _e('logo'); ?>" /><?php
-				?></a>
 			<?php if (!is_home() || !is_front_page()) { ?>
 				<div class="site-information">
 					<span class="website"><?php bloginfo('name'); ?></span>

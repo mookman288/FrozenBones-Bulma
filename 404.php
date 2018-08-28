@@ -12,8 +12,14 @@
 
 	 get_header();
 ?>
-			<section id="main" class="column eight page-404">
-				<?php _frozen_not_found(); ?>
+			<section class="section">
+				<div class="container">
+					<div class="columns">
+						<section id="main" class="column is-9 page-404">
+							<?php _frozen_not_found(); ?>
+						</section>
+						<?php get_sidebar(); ?>
+					</div>
+				</div>
 			</section>
-			<?php get_sidebar(); ?>
 <?php get_footer(); ?>

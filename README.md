@@ -3,11 +3,13 @@
 
 ### Bulma
 
-This version of FrozenBones integrates the Bulma CSS framework using the Node.js package manager, and Gulp. After cloning this repository, you can build a fresh copy of this theme:
+This child theme of FrozenBones integrates the Bulma CSS framework using the Node.js package manager, and Gulp. After cloning this repository, you can build a fresh copy of this theme:
 
 1. `npm install` or `yarn install`.
 2. `npm install -g gulp` or `yarn global gulp`.
 3. `gulp` or `gulp watch` with `--dev` as necessary.
+
+Note: releases on the official repository are in dev mode.
 
 ### Introduction
 
