@@ -274,26 +274,6 @@
 	}
 
 	//If the function exists.
-	if (!function_exists('_frozen_navigation_menu_class')) {
-		/**
-		 * Classes for navigation menues.
-		 */
-		function _frozen_navigation_menu_class($classes, $item, $args) {
-			//Add the default class.
-			$classes[]		=	'navbar-item';
-
-			//If this is a parent of a child.
-			if (!empty($item -> current_item_parent) || !empty($item -> current_item_ancestor)) {
-				//Add the dropdown class.
-				$classes[]	=	'has-dropdown';
-			}
-
-			//Return the classes.
-			return $classes;
-		}
-	}
-
-	//If the function exists.
 	if (!function_exists('_frozen_wp_list_pages_menu_class')) {
 		/**
 		 * Classes for wp list pages menues.
@@ -338,8 +318,9 @@
 									</div>
 								</nav>',
 				'depth' => 0,
-				'fallback_cb' => '_frozen_wasteland'
-				));
+				'fallback_cb' => '_frozen_wasteland',
+				'walker' => new walkerNavigation()
+		));
 	}
 
 	/**
@@ -359,8 +340,9 @@
 				'link_after' => '',
 				'items_wrap' => '<nav id="%1$s"><ul id="%2$s">%3$s</ul></nav>',
 				'depth' => 1,
-				'fallback_cb' => '_frozen_wasteland'
-				));
+				'fallback_cb' => '_frozen_wasteland',
+				'walker' => new walkerNavigation()
+		));
 	}
 
 	/**
@@ -419,11 +401,114 @@
 								</div>
 							</nav>',
 				'depth' => 0,
-				'fallback_cb' => '_frozen_navigation'
-				));
+				'fallback_cb' => '_frozen_navigation',
+				'walker' => new walkerNavigation()
+		));
+	}
+
+	class walkerNavigation extends Walker_Nav_Menu {
+		/**
+		 * @see Walker_Nav_Menu::display_element
+		 */
+		function display_element($element, &$children_elements, $max_depth, $depth = 0, $args, &$output) {
+			//If the args are an object.
+			if (is_object($args[0])) {
+				//Check whether this has children.
+				$args[0] -> has_children = (!empty($children_elements[$element -> {$this -> db_fields['id']}]));
+			}
+
+			//Return the display element.
+			return parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
+		}
+
+		/**
+		 * @see Walker_Nav_Menu::start_lvl()
+		 */
+		function start_lvl(&$output, $depth = 0, $args = array()) {
+			//Set the indent.
+			$indent = str_repeat("\t", $depth);
+
+			//If this element is a child.
+			if ($args -> has_children) {
+				//Append the output.
+				$output .= sprintf('%s%s<ul class="navbar-dropdown">%s', "\n", $indent, "\n");
+			}
+		}
+
+		/**
+		 * @see Walker_Nav_Menu::start_el()
+		 */
+		public function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
+			//Declare variables.
+			$liClass	=	'navbar-item';
+			$aClass		=	'navbar-anchor';
+
+			//Set the indent.
+			$indent = str_repeat("\t", $depth);
+
+			//If this element has children.
+			if ($args -> has_children) {
+				//Set the li class.
+				$liClass	.=	' has-dropdown is-hoverable';
+				$aClass		=	' navbar-link';
+			}
+
+			//If there is a divider specified as the title.
+			if (((strcasecmp($item -> title, 'divider') == 0) || (strcasecmp($item -> attr_title, 'divider') == 0))) {
+				$liClass	.=	' divider';
+			}
+
+			//If this is disabled as specified in the title.
+			if (strcasecmp($item -> attr_title, 'disabled') == 0) {
+				$liClass	.=	' disabled';
+				$aClass		.=	' disabled';
+			}
+
+			/*
+			 * Modified default walker code.
+			 */
+
+			$class_names	=	$value	=	'';
+
+			//Get the classes from the existing array of item classes.
+			$classes		=	empty($item -> classes) ? array() : (array) $item -> classes;
+
+			//Merge our custom classes.
+			$classes		=	array_merge($classes, explode(' ', $liClass));
+
+			//Set an additional class for the current menu item.
+			$classes[]		=	'menu-item-' . $item -> ID;
+
+			//Join the class names and filter them based on the existing nav menu class filter.
+			$class_names	=	join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
+			$class_names	=	sprintf('class="%s"', esc_attr($class_names));
+
+			//Set the ID.
+			$id				=	apply_filters('nav_menu_item_id', 'menu-item-'. $item -> ID, $item, $args);
+			$id				=	strlen($id) ? sprintf('id="%s"', esc_attr($id)) : '';
+
+			//Set the output for the li element.
+			$output			.=	sprintf("<li %s %s %s>", $id, $value, $class_names);
+
+			/*
+			 * Set the attributes.
+			 */
+
+			$attributes		=	(!empty($item -> attr_title)) ? sprintf(' title="%s"', esc_attr($item -> attr_title)) :
+				((!empty($item -> title)) ? sprintf(' title="%s"', esc_attr($item -> title)) : '');
+			$attributes		.=	(!empty($item -> target)) ? sprintf(' target="%s"', esc_attr($item -> target)) : '';
+			$attributes		.=	(!empty($item -> xfn)) ? sprintf(' rel="%s"', esc_attr($item -> xfn)) : '';
+			$attributes		.=	(!empty($item -> url)) ? sprintf(' href="%s"', esc_attr($item -> url)) : '';
+			$attributes		.=	(!$aClass) ? '' : sprintf(' class="%s"', esc_attr($aClass));
+
+			//Create the anchor.
+			$anchor			=	sprintf('%s<a%s>%s%s%s</a>%s', $args -> before, $attributes, $args -> link_before,
+			apply_filters('the_title', $item -> title, $item -> ID), $args -> link_after, $args -> after);
+
+			$output			.=	apply_filters('walker_nav_menu_start_el', $anchor, $item, $depth, $args);
+		}
 	}
 
 	//Add filters.
-	add_filter('nav_menu_css_class', '_frozen_navigation_menu_class', 1, 3);
 	add_filter('wp_list_pages','_frozen_wp_list_pages_menu_class', 10, 3);
 ?>

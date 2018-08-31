@@ -19,7 +19,7 @@ FrozenBones is a look into the foundations of WordPress development theming. Dev
 
 Fork and expand your version of FrozenBones. If there's an issue, or modernization that you want to see in the core deliverable, feel free to open an issue.
 
-FrozenBones is currently being supported as of August 2018.
+FrozenBones Bulma is currently being supported as of August 2018.
 
 ### Show Support
 

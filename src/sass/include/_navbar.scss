@@ -1,0 +1,33 @@
+.navbar {
+	li {
+		&.navbar-item {
+			padding: 0;
+			align-items: stretch;
+
+			> .navbar-anchor {
+				@extend .navbar-link;
+
+				padding-right: 0.75rem;
+
+				&:after {
+					display: none;
+				}
+			}
+		}
+
+		ul {
+			li {
+				> a {
+					width: 100.00%;
+					background-color: transparent !important;
+				}
+
+				&:hover {
+					> a {
+						background-color: darken($navbar-item-hover-background-color, 5%) !important;
+					}
+				}
+			}
+		}
+	}
+}
