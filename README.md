@@ -13,7 +13,7 @@ Note: releases on the official repository are in dev mode.
 
 ### Introduction
 
-FrozenBones is a look into the foundations of WordPress development theming. Developed by [PxO Ink LLC](http://pxoink.net/) and based on [Bones](https://github.com/eddiemachado/bones) by [Eddie Machado](http://themble.com/bones) and [_s](https://github.com/automattic/_s), this theme is designed to provide a comprehensive platform while maintaining a simplistic, "bare-bones," product. Modern versions of FrozenBones are based off of changes to the 20xx themes developed by WordPress.
+**FrozenBones** is a look into the foundations of WordPress development theming. Developed by [PxO Ink LLC](http://pxoink.net/) and based on [Bones](https://github.com/eddiemachado/bones) by [Eddie Machado](http://themble.com/bones) and [_s](https://github.com/automattic/_s), this theme is designed to provide a comprehensive platform while maintaining a simplistic, "bare-bones," product. Modern versions of FrozenBones are based off of changes to the 20xx themes developed by WordPress.
 
 ### Collaboration
 
